@@ -25,48 +25,22 @@ app.get('/', (request: Request, response: Response) => {
 
 
 
-app.use(function(req: Request, res:Response, next) {
-    
+/* app.use(function(req: Request, res:Response, next) {
+    console.log(req.body)
     if (req.method == 'POST' || req.method == 'PUT' ) {
-        const {name , age, cpf,email} = req.body
-        if (typeof name != 'string' || isNaN(Number(age)) || typeof cpf != 'string' ) {
+        const {name , age, cpf,email,title,value,type} = req.body
+
+        if (typeof name != 'string' || isNaN(Number(age)) || typeof cpf != 'string' || typeof title != 'string' || isNaN(Number(value)) || typeof type != 'string'  ) {
             res.status(400).send('Campos invalidos !!')
         }
     } else{
         console.log('campos OK ! !')
         console.log(Math.random().toString(36).substring(2))
         
-
-        //ENCADEAMENTO ****************
-        app.use('/users/:id',(req:Request,res:Response,next)=>{
-
-            const name = String(req.body.name)
-            const age:string = String(req.body.age)
-            const id = Number(req.params.id)
-            const cpf = String(req.body.cpf)
-    
-            if (req.method == 'POST' || req.method == 'PUT' ) {
-        
-            let indice:number = users.findIndex( users => users.id == id );
-        
-            if (indice > -1) {
-                console.log(`id encontrado para ${name}`)
-                
-                
-            }else{
-                res.status(400).send('Campos invalidos !!')
-            }
-    
-            next();
-            
-        }
-            
-        
-        }) // FIM ENCADEAMENTO ********* 
     }
     
     next();
-    });
+    }); */
  
 
        
@@ -277,8 +251,7 @@ app.post('/users/:userId/transactions',(req:Request,res:Response)=>{
     const title = String(req.body.title)
     const value = Number(req.body.value)
     const id = Number(req.params.userId)
-    const type = String(req.body.type)   
-    
+    const type = String(req.body.type)    
     
     
     console.log(id)
@@ -288,19 +261,20 @@ app.post('/users/:userId/transactions',(req:Request,res:Response)=>{
         
             if (indice > -1) {
                 console.log(`id encontrado `)
-
                 idTrans++
                 let trans1 = new Transaction(idTrans,title,value,type)
-                users[indice].transactions.push(trans1)
-                res.send(`Adicionado`)
+                users[indice].transactions.push(trans1) 
+                res.status(201).send('add')
                 
+            }else{
+                res.status(400).send(`erro`)
             }
 
          
         
     }
 
-    res.status(400).send(`erro`)
+    
 
     
 
