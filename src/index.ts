@@ -264,7 +264,7 @@ app.post('/users/:userId/transactions',(req:Request,res:Response)=>{
                 idTrans++
                 let trans1 = new Transaction(idTrans,title,value,type)
                 users[indice].transactions.push(trans1) 
-                res.status(201).send('add')
+                res.status(201).send('adicionado !')
                 
             }else{
                 res.status(400).send(`erro`)
