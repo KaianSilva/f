@@ -25,7 +25,7 @@ app.get('/', (request: Request, response: Response) => {
 
 
 
-/* app.use(function(req: Request, res:Response, next) {
+app.use(function(req: Request, res:Response, next) {
     
     if (req.method == 'POST' || req.method == 'PUT' ) {
         const {name , age, cpf,email} = req.body
@@ -67,7 +67,7 @@ app.get('/', (request: Request, response: Response) => {
     
     next();
     });
- */
+ 
 
        
 
